@@ -28,9 +28,11 @@ common_cppflags = [
 ]
 
 common_cflags = [
+  '-fPIC'
 ]
 
 common_cxxflags = [
+  '-fPIC'
 ]
 
 test_common_flags = [
