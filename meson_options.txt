@@ -36,6 +36,11 @@ option('eventfd', type: 'boolean', value: true, description: 'Use eventfd() on L
 option('signalfd', type: 'boolean', value: true, description: 'Use signalfd() on Linux')
 
 #
+# rtopt patch support
+#
+option('rtopt', type: 'boolean', value: true, description: 'Enable realtime support')
+
+#
 # Network support
 #
 

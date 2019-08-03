@@ -158,6 +158,8 @@ if not get_option('syslog').disabled()
   endif
 endif
 
+conf.set('ENABLE_RTOPT', get_option('rtopt'))
+
 enable_database = get_option('database')
 conf.set('ENABLE_DATABASE', enable_database)
 
