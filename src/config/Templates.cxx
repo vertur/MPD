@@ -21,6 +21,7 @@
 #include "Option.hxx"
 #include "util/Macros.hxx"
 
+#include <config.h>
 #include <string.h>
 
 const ConfigTemplate config_param_templates[] = {
@@ -90,6 +91,9 @@ const ConfigTemplate config_block_templates[] = {
 	{ "resampler" },
 	{ "filter", true },
 	{ "database" },
+#ifdef ENABLE_RTOPT
+        { "realtime_option", false },
+#endif
 	{ "neighbors", true },
 };
 

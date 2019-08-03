@@ -36,6 +36,10 @@
 #include "util/StringFormat.hxx"
 #endif
 
+#ifdef ENABLE_RTOPT
+#include "RealtimeOption.hxx"
+#endif
+
 static inline void
 SetThreadName(const char *name) noexcept
 {
@@ -49,6 +53,11 @@ SetThreadName(const char *name) noexcept
 #else
 	pthread_setname_np(pthread_self(), name);
 #endif
+
+#ifdef ENABLE_RTOPT
+        RealtimeOption::ChangeThreadPriority(name);
+#endif
+
 #elif defined(HAVE_PRCTL) && defined(PR_SET_NAME)
 	prctl(PR_SET_NAME, (unsigned long)name, 0, 0, 0);
 #else

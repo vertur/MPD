@@ -61,6 +61,10 @@
 #include "util/RuntimeError.hxx"
 #include "util/ScopeExit.hxx"
 
+#ifdef ENABLE_RTOPT
+#include "thread/RealtimeOption.hxx"
+#endif
+
 #ifdef ENABLE_DAEMON
 #include "unix/Daemon.hxx"
 #endif
@@ -441,6 +445,11 @@ MainOrThrow(int argc, char *argv[])
 
 	log_init(raw_config, options.verbose, options.log_stderr);
 
+#ifdef ENABLE_RTOPT
+        RealtimeOption::Initialize(raw_config);
+        RealtimeOption::ChangeThreadPriority("main");
+#endif
+
 	instance = new Instance();
 	AtScopeExit() {
 		delete instance;
@@ -503,6 +512,9 @@ mpd_main_after_fork(const ConfigData &raw_config, const Config &config)
 	spl_global_init(raw_config);
 #ifdef ENABLE_ARCHIVE
 	const ScopeArchivePluginsInit archive_plugins_init;
+#endif
+#ifdef ENABLE_RTOPT
+        RealtimeOption::LockMemory();
 #endif
 
 	pcm_convert_global_init(raw_config);

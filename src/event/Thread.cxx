@@ -51,6 +51,7 @@ EventThread::Run() noexcept
 {
 	SetThreadName(realtime ? "rtio" : "io");
 
+#ifndef ENABLE_RTOPT
 	if (realtime) {
 		SetThreadTimerSlackUS(10);
 
@@ -61,6 +62,7 @@ EventThread::Run() noexcept
 				 "RTIOThread could not get realtime scheduling, continuing anyway");
 		}
 	}
+#endif
 
 	event_loop.Run();
 }

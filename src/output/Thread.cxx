@@ -403,6 +403,7 @@ AudioOutputControl::Task() noexcept
 {
 	FormatThreadName("output:%s", GetName());
 
+#ifndef ENABLE_RTOPT
 	try {
 		SetThreadRealtime();
 	} catch (...) {
@@ -411,6 +412,7 @@ AudioOutputControl::Task() noexcept
 	}
 
 	SetThreadTimerSlackUS(100);
+#endif
 
 	const std::lock_guard<Mutex> lock(mutex);
 

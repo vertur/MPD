@@ -13,6 +13,7 @@ thread = static_library(
   'thread',
   'Util.cxx',
   'Thread.cxx',
+  'RealtimeOption.cxx',
   include_directories: inc,
   dependencies: [
     threads_dep,

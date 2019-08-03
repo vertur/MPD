@@ -20,6 +20,7 @@
 #ifndef MPD_CONFIG_OPTION_HXX
 #define MPD_CONFIG_OPTION_HXX
 
+#include <config.h>
 #include "util/Compiler.h"
 
 #if defined(_WIN32) && CLANG_OR_GCC_VERSION(4,7)
@@ -90,6 +91,9 @@ enum class ConfigBlockOption {
 	RESAMPLER,
 	AUDIO_FILTER,
 	DATABASE,
+#ifdef ENABLE_RTOPT
+        REALTIME_OPTION,
+#endif
 	NEIGHBORS,
 	MAX
 };
